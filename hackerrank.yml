@@ -1,0 +1,20 @@
+version: 1.0
+configuration:
+  has_webserver: true
+  readonly_paths:
+    - TestProject.Tests/IntegrationTests.cs
+    - TestProject.WebAPI/Controllers/TestMiddlewareController.cs
+  scoring:
+    command: sbt test
+    files: [target/test-reports/TEST-com.nike.trade.StockTradeApiTest.xml]
+    testcase_weights:
+      "StockTradeAPiController getOrderRoute should return an order": 0.40
+      "StockTradeAPiController getOrderRoute should return not found for an invalid order": 0.20
+      "StockTradeAPiController createOrderRoute should return an order": 0.40
+  ide_config:
+    default_open_files:
+      - "src/test/scala/com/nike/trade/StockTradeApiControllerSpec.scala"
+    project_menu:
+      run: sbt run
+      install: sbt clean compile
+      test: sbt test
